@@ -22,9 +22,9 @@ The basic flow of usage is as follows:
 
 1. Instantiate a [provider](src/Solarix/Shipping/Provider) such as `FedExProvider`.
 2. Create object instances via [factories](src/Solarix/Shipping/Factory) obtained through the provider's `getXXXFactory` methods.
-3. Create a base [Shipment](src/Solarix/Shipping/Model/Shipment) instance
-4. Add one or more [ShippableUnits](src/Solarix/Shipping/Model/ShippableUnit) to the `Shipment`.  A `ShippableUnit` is a collection of one or more [Shippables](src/Solarix/Shipping/Model/Shippable), each of which represent a shippable entity (package, item, etc).
+3. Create a base [Shipment](src/Solarix/Shipping/Model/Shipment.php) instance
+4. Add one or more [ShippableUnits](src/Solarix/Shipping/Model/ShippableUnit.php) to the `Shipment`.  A `ShippableUnit` is a collection of one or more [Shippables](src/Solarix/Shipping/Model/Shippable.php), each of which represent a shippable entity (package, item, etc).
 5. Set appropriate values of `Shippable` such as dimensions, weight, quantity, etc.
-6. Create and assign origin and destination [Addresses](src/Solarix/Shipping/Model/Address) to the `Shipment`.
-7. Create a [RateRequest](src/Solarix/Shipping/Model/RateRequest) and pass the `Shipment` instance.
-8. Execute the `RateRequest` to get back a [RateResponse](src/Solarix/Shipping/Model/RateResponse), which contains one or more [Rate](src/Solarix/Shipping/Model/Rate) instances containing details about the rate data from the provider's API response.
+6. Create and assign origin and destination [Addresses](src/Solarix/Shipping/Model/Address.php) to the `Shipment`.
+7. Create a [RateRequest](src/Solarix/Shipping/Model/Rate/RateRequest.php) and pass the `Shipment` instance.
+8. Execute the `RateRequest` to get back a [RateResponse](src/Solarix/Shipping/Model/Rate/RateResponse.php), which contains one or more [Rate](src/Solarix/Shipping/Model/Rate/Rate.php) instances containing details about the rate data from the provider's API response.
