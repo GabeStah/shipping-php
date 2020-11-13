@@ -1,0 +1,22 @@
+{
+  "name": "solarix/shipping",
+  "authors": [
+    {
+      "name": "Gabe Wyatt",
+      "email": "gabe@solarixdigital.com"
+    }
+  ],
+  "description": "Handles common shipping calculations for supported third-party providers.",
+  "version": "1.2.21",
+  "autoload": {
+    "psr-4": {
+      "Solarix\\Shipping\\": "src/Solarix/Shipping"
+    }
+  },
+  "require": {
+    "php": "^7.3",
+    "ext-json": "*",
+    "jeremy-dunn/php-fedex-api-wrapper": "^4.0",
+    "symfony/dotenv": "^4.4"
+  }
+}
