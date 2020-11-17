@@ -10,6 +10,10 @@ use Solarix\Shipping\Factory\RateRequestFactory;
 use Solarix\Shipping\Factory\RateRequestFactoryInterface;
 use Solarix\Shipping\Factory\ShipmentFactory;
 use Solarix\Shipping\Factory\ShipmentFactoryInterface;
+use Solarix\Shipping\Factory\ShippableFactory;
+use Solarix\Shipping\Factory\ShippableFactoryInterface;
+use Solarix\Shipping\Factory\ShippableUnitFactory;
+use Solarix\Shipping\Factory\ShippableUnitFactoryInterface;
 
 class BaseProvider implements ProviderInterface
 {
@@ -31,5 +35,15 @@ class BaseProvider implements ProviderInterface
   public function getShipmentFactory(): ShipmentFactoryInterface
   {
     return new ShipmentFactory($this);
+  }
+
+  public function getShippableFactory(): ShippableFactoryInterface
+  {
+    return new ShippableFactory($this);
+  }
+
+  public function getShippableUnitFactory(): ShippableUnitFactoryInterface
+  {
+    return new ShippableUnitFactory($this);
   }
 }

@@ -2,6 +2,9 @@
 
 namespace Solarix\Shipping\Model\Rate;
 
+use Solarix\Shipping\Model\ResponseStatus;
+use Solarix\Shipping\Model\ResponseStatusInterface;
+
 /**
  * Class RateResponse
  *
@@ -15,6 +18,8 @@ class RateResponse implements RateResponseInterface
   protected $id;
   /** @var RateInterface[]|null */
   protected $rates;
+  /** @var ResponseStatus[]|null */
+  protected $statuses;
 
   /**
    * @return int|string|null
@@ -63,5 +68,54 @@ class RateResponse implements RateResponseInterface
   {
     $this->rates = $rates;
     return $this;
+  }
+
+  /**
+   * @param ResponseStatus $responseStatus
+   *
+   * @return $this|RateResponseInterface
+   */
+  public function addStatus(
+    ResponseStatus $responseStatus
+  ): RateResponseInterface {
+    $this->statuses[] = $responseStatus;
+    return $this;
+  }
+
+  /**
+   * @return ResponseStatus[]|null
+   */
+  public function getStatuses(): ?array
+  {
+    return $this->statuses;
+  }
+
+  /**
+   * @param ResponseStatus[]|null $statuses
+   *
+   * @return RateResponseInterface
+   */
+  public function setStatuses(?array $statuses): RateResponseInterface
+  {
+    $this->statuses = $statuses;
+    return $this;
+  }
+
+  /**
+   * Determine if response experienced an error.
+   *
+   * @return ResponseStatusInterface|bool
+   */
+  public function hasError()
+  {
+    if (!$this->getStatuses()) {
+      return false;
+    }
+    foreach ($this->getStatuses() as $responseStatus) {
+      if ($responseStatus->getIsError()) {
+        return $responseStatus;
+      }
+    }
+    return false;
   }
 }

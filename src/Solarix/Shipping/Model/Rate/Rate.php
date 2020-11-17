@@ -13,6 +13,8 @@ class Rate implements RateInterface
 {
   /** @var int */
   protected $baseCharge;
+  /** @var string|null */
+  protected $estimatedDeliveryAt;
   /** @var int */
   protected $fee;
   /** @var string|int|null */
@@ -114,6 +116,26 @@ class Rate implements RateInterface
   public function setTotalCharge(int $totalCharge): RateInterface
   {
     $this->totalCharge = $totalCharge;
+    return $this;
+  }
+
+  /**
+   * @return string|null
+   */
+  public function getEstimatedDeliveryAt(): ?string
+  {
+    return $this->estimatedDeliveryAt;
+  }
+
+  /**
+   * @param string|null $estimatedDeliveryAt
+   *
+   * @return RateInterface
+   */
+  public function setEstimatedDeliveryAt(
+    ?string $estimatedDeliveryAt
+  ): RateInterface {
+    $this->estimatedDeliveryAt = $estimatedDeliveryAt;
     return $this;
   }
 }

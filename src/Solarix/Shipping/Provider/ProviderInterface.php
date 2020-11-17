@@ -6,6 +6,8 @@ use Solarix\Shipping\Factory\AddressFactoryInterface;
 use Solarix\Shipping\Factory\RateFactoryInterface;
 use Solarix\Shipping\Factory\RateRequestFactoryInterface;
 use Solarix\Shipping\Factory\ShipmentFactoryInterface;
+use Solarix\Shipping\Factory\ShippableFactoryInterface;
+use Solarix\Shipping\Factory\ShippableUnitFactoryInterface;
 
 interface ProviderInterface
 {
@@ -28,4 +30,14 @@ interface ProviderInterface
    * @return ShipmentFactoryInterface
    */
   public function getShipmentFactory(): ShipmentFactoryInterface;
+
+  /**
+   * @return ShippableFactoryInterface
+   */
+  public function getShippableFactory(): ShippableFactoryInterface;
+
+  /**
+   * @return ShippableUnitFactoryInterface
+   */
+  public function getShippableUnitFactory(): ShippableUnitFactoryInterface;
 }

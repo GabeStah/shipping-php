@@ -2,6 +2,9 @@
 
 namespace Solarix\Shipping\Model\Rate;
 
+use Solarix\Shipping\Model\ResponseStatus;
+use Solarix\Shipping\Model\ResponseStatusInterface;
+
 /**
  * Interface RateResponseInterface
  *
@@ -41,4 +44,32 @@ interface RateResponseInterface
    * @return RateResponseInterface
    */
   public function setRates(?array $rates): RateResponseInterface;
+
+  /**
+   * @param ResponseStatus $responseStatus
+   *
+   * @return $this|RateResponseInterface
+   */
+  public function addStatus(
+    ResponseStatus $responseStatus
+  ): RateResponseInterface;
+
+  /**
+   * @return ResponseStatus[]|null
+   */
+  public function getStatuses(): ?array;
+
+  /**
+   * @param ResponseStatus[]|null $statuses
+   *
+   * @return RateResponseInterface
+   */
+  public function setStatuses(?array $statuses): RateResponseInterface;
+
+  /**
+   * Determine if response experienced an error.
+   *
+   * @return ResponseStatusInterface|bool
+   */
+  public function hasError();
 }

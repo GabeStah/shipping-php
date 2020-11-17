@@ -7,7 +7,7 @@
     }
   ],
   "description": "Handles common shipping calculations for supported third-party providers.",
-  "version": "1.2.21",
+  "version": "1.2.32",
   "autoload": {
     "psr-4": {
       "Solarix\\Shipping\\": "src/Solarix/Shipping"

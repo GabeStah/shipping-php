@@ -14,6 +14,7 @@ use Solarix\Shipping\Model\Rate\RateRequest as BaseRateRequest;
 use Solarix\Shipping\Model\Rate\RateRequestInterface;
 use Solarix\Shipping\Model\Rate\RateResponse;
 use Solarix\Shipping\Model\Rate\RateResponseInterface;
+use Solarix\Shipping\Model\ResponseStatus;
 use Solarix\Shipping\Model\ShipmentInterface;
 use Solarix\Shipping\Model\ShippableInterface;
 use Solarix\Shipping\Provider\FedEx\ComplexType\Party;
@@ -225,6 +226,19 @@ class RateRequest extends BaseRateRequest
   {
     // Short circuit if not successful
     if (in_array($reply->HighestSeverity, ['ERROR', 'FAILURE', 'WARNING'])) {
+      foreach ($reply->Notifications as $notification) {
+        if (
+          in_array($notification->Severity, ['ERROR', 'FAILURE', 'WARNING'])
+        ) {
+          $this->getRateResponse()->addStatus(
+            (new ResponseStatus())
+              ->setIsError(true)
+              ->setMessage($notification->LocalizedMessage)
+              ->setCode($notification->Code)
+          );
+        }
+      }
+
       return null;
     }
 
@@ -237,7 +251,8 @@ class RateRequest extends BaseRateRequest
             'PAYOR_LIST_SHIPMENT'
         ) {
           $rate = $this->getRateFactory()->create();
-          $rate->setId($ratedShipmentDetail->ShipmentRateDetail->RateType);
+          $rate->setId($rateReplyDetail->ServiceType);
+          $rate->setEstimatedDeliveryAt($rateReplyDetail->DeliveryTimestamp);
           $rate->setBaseCharge(
             $ratedShipmentDetail->ShipmentRateDetail->TotalBaseCharge->Amount
           );

@@ -4,7 +4,6 @@ namespace Solarix\Shipping\Model;
 
 use Solarix\Shipping\Traits\HasDestinationTrait;
 use Solarix\Shipping\Traits\HasOriginTrait;
-use Solarix\Shipping\Traits\HasProviderTrait;
 use Solarix\Shipping\Traits\HasShippableUnitsTrait;
 
 /**
