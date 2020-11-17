@@ -92,8 +92,6 @@ $shipment->addShippableUnit($shippableUnit);
 
 However, in some scenarios it may be useful to divide `Shippables` into separate `ShippableUnit` groupings.  For example, one `ShippableUnit` for physical goods, one for digital goods, etc.
 
-Next, create a `ShippableUnit` which is a collection of `Shippable` objects.  Adding multiple `Shippable` `ShippableUnit` 
-
 ### Addressing
 
 If the `Provider` requires physical addresses to calculate rates the next step is to use the `AddressFactory` to create addresses:
