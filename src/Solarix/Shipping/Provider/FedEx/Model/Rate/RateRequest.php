@@ -233,7 +233,9 @@ class RateRequest extends BaseRateRequest
           $this->getRateResponse()->addStatus(
             (new ResponseStatus())
               ->setIsError(true)
-              ->setMessage($notification->LocalizedMessage)
+              ->setMessage(
+                $notification->LocalizedMessage ?? $notification->Message
+              )
               ->setCode($notification->Code)
           );
         }
