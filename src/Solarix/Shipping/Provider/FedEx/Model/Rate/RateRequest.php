@@ -225,11 +225,9 @@ class RateRequest extends BaseRateRequest
   public function updateRates(RateReply $reply)
   {
     // Short circuit if not successful
-    if (in_array($reply->HighestSeverity, ['ERROR', 'FAILURE', 'WARNING'])) {
+    if (in_array($reply->HighestSeverity, ['ERROR', 'FAILURE'])) {
       foreach ($reply->Notifications as $notification) {
-        if (
-          in_array($notification->Severity, ['ERROR', 'FAILURE', 'WARNING'])
-        ) {
+        if (in_array($notification->Severity, ['ERROR', 'FAILURE'])) {
           $this->getRateResponse()->addStatus(
             (new ResponseStatus())
               ->setIsError(true)
