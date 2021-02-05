@@ -242,21 +242,26 @@ class RateRequest extends BaseRateRequest
       return null;
     }
 
-    foreach ($reply->RateReplyDetails as $rateReplyDetail) {
-      foreach ($rateReplyDetail->RatedShipmentDetails as $ratedShipmentDetail) {
-        if (
-          $ratedShipmentDetail->ShipmentRateDetail->RateType ===
-            'PAYOR_LIST_PACKAGE' ||
-          $ratedShipmentDetail->ShipmentRateDetail->RateType ===
-            'PAYOR_LIST_SHIPMENT'
+    if (is_array($reply->RateReplyDetails)) {
+      foreach ($reply->RateReplyDetails as $rateReplyDetail) {
+        foreach (
+          $rateReplyDetail->RatedShipmentDetails
+          as $ratedShipmentDetail
         ) {
-          $rate = $this->getRateFactory()->create();
-          $rate->setId($rateReplyDetail->ServiceType);
-          $rate->setEstimatedDeliveryAt($rateReplyDetail->DeliveryTimestamp);
-          $rate->setBaseCharge(
-            $ratedShipmentDetail->ShipmentRateDetail->TotalBaseCharge->Amount
-          );
-          $this->getRateResponse()->addRate($rate);
+          if (
+            $ratedShipmentDetail->ShipmentRateDetail->RateType ===
+              'PAYOR_LIST_PACKAGE' ||
+            $ratedShipmentDetail->ShipmentRateDetail->RateType ===
+              'PAYOR_LIST_SHIPMENT'
+          ) {
+            $rate = $this->getRateFactory()->create();
+            $rate->setId($rateReplyDetail->ServiceType);
+            $rate->setEstimatedDeliveryAt($rateReplyDetail->DeliveryTimestamp);
+            $rate->setBaseCharge(
+              $ratedShipmentDetail->ShipmentRateDetail->TotalBaseCharge->Amount
+            );
+            $this->getRateResponse()->addRate($rate);
+          }
         }
       }
     }
