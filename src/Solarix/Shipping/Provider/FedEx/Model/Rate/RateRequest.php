@@ -125,16 +125,16 @@ class RateRequest extends BaseRateRequest
     // Set dimensions
     $dimensions = new ComplexType\Dimensions();
     $dimensions
-      ->setLength($shippable->getDepth())
-      ->setWidth($shippable->getWidth())
-      ->setHeight($shippable->getHeight())
+      ->setLength($shippable->getDepth() > 0 ? $shippable->getDepth() : 1.0)
+      ->setWidth($shippable->getWidth() > 0 ? $shippable->getWidth() : 1.0)
+      ->setHeight($shippable->getHeight() > 0 ? $shippable->getHeight() : 1.0)
       ->setUnits(SimpleType\LinearUnits::_IN);
 
     // Set weight
     $weight = new ComplexType\Weight();
     $weight
       ->setUnits(SimpleType\WeightUnits::_LB)
-      ->setValue($shippable->getWidth());
+      ->setValue($shippable->getWidth() > 0 ? $shippable->getWidth() : 1.0);
 
     $lineItem = new ComplexType\RequestedPackageLineItem();
     $lineItem->setWeight($weight)->setDimensions($dimensions);
