@@ -258,7 +258,8 @@ class RateRequest extends BaseRateRequest
             $rate->setId($rateReplyDetail->ServiceType);
             $rate->setEstimatedDeliveryAt($rateReplyDetail->DeliveryTimestamp);
             $rate->setBaseCharge(
-              $ratedShipmentDetail->ShipmentRateDetail->TotalBaseCharge->Amount
+              (int) ($ratedShipmentDetail->ShipmentRateDetail->TotalBaseCharge
+                ->Amount * 100)
             );
             $this->getRateResponse()->addRate($rate);
           }
