@@ -16,10 +16,20 @@ class Address extends BaseAddress
     parent::__construct($options);
   }
 
+  /**
+   * Get state or province code.
+   *
+   * Concatenates to last 2 characters to meet FedEx API requirements.
+   *
+   * @return string|null
+   */
   public function getStateOrProvinceCode(): ?string
   {
     if (strlen(parent::getStateOrProvinceCode()) > 2) {
-      return substr(parent::getStateOrProvinceCode(), 0, 2);
+      return substr(
+        parent::getStateOrProvinceCode(),
+        strlen(parent::getStateOrProvinceCode()) - 2
+      );
     }
     return parent::getStateOrProvinceCode();
   }
