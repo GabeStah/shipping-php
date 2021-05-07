@@ -3,7 +3,7 @@
   "authors": [
     {
       "name": "Gabe Wyatt",
-      "email": "gabe@solarixdigital.com"
+      "email": "gabe@gabewyatt.com"
     }
   ],
   "description": "Handles common shipping calculations for supported third-party providers.",
