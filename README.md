@@ -1,6 +1,6 @@
-# Solarix Shipping (PHP)
+# Shipping (PHP)
 
-The Solarix Shipping (PHP) package handles basic shipping tasks with a provider-based plugin system.
+The Shipping (PHP) package handles basic shipping tasks with a provider-based plugin system.
 
 ## Features
 
@@ -12,7 +12,7 @@ The Solarix Shipping (PHP) package handles basic shipping tasks with a provider-
 
 ## Architecture
 
-Solarix Shipping makes heavy use of strategy, factory, builder, and chain of responsibility design principles.
+Shipping makes heavy use of strategy, factory, builder, and chain of responsibility design principles.
 
 A provider is selected via code or environment variable which determines provider-specific logic, classes, and overrides to be invoked during execution.  Strict interface adherence encourages strategy patterns, allowing the provider to override a given class/method/behavior without the client's knowledge.
 
